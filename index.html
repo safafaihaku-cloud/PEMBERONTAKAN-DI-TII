@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DI/TII — Disintegrasi Bangsa | Arsip Sejarah Digital</title>
+    <!-- Google Fonts untuk nuansa arsip sejarah -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Slab:wght@300;400;600;700&family=Rye&family=Special+Elite&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --dark-navy: #17232B;
+            --cream: #F1E2C3;
+            --beige: #D8C29A;
+            --old-paper: #B99B6B;
+            --near-black: #202020;
+            --dark-brown: #594333;
+            --brick-red: #8F3029;
+            
+            /* Aksen Wilayah */
+            --aceh: #48634A;
+            --jateng: #304E62;
+            --kalsel: #594267;
+            --sulsel: #A65B3D;
+            --jabar: #8F3029;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--dark-navy);
+            color: var(--cream);
+            font-family: 'Roboto Slab', serif;
+            line-height: 1.7;
+            overflow-x: hidden;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+
+        /* Typography */
+        h1, h2, h3, .brand-title {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 1.5px;
+        }
+
+        .archive-font {
+            font-family: 'Special Elite', cursive;
+        }
+
+        .rye-font {
+            font-family: 'Rye', serif;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(23, 35, 43, 0.95);
+            border-bottom: 1px solid var(--old-paper);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-brand {
+            font-family: 'Special Elite', cursive;
+            font-size: 1.1rem;
+            color: var(--beige);
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--old-paper);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--cream);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Scroll Progress Bar */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: var(--brick-red);
+            width: 0%;
+            z-index: 1001;
+            transition: width 0.1s ease;
+        }
+
+        /* Container & Sections */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: 6rem 0 4rem 0;
+            border-bottom: 1px dashed rgba(185, 155, 107, 0.2);
+        }
+
+        /* Cover Section */
+        #cover {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(rgba(23, 35, 43, 0.85), rgba(23, 35, 43, 0.95)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%2317232B"/><path d="M0 0l100 100M100 0L0 100" stroke="%23202020" stroke-width="1"/></svg>');
+            position: relative;
+        }
+
+        .cover-tag {
+            font-family: 'Special Elite', cursive;
+            color: var(--old-paper);
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            border: 1px solid var(--old-paper);
+            padding: 0.4rem 1rem;
+            display: inline-block;
+        }
+
+        #cover h1 {
+            font-family: 'Rye', serif;
+            font-size.size: 3.5rem;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            color: var(--cream);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .cover-subtitle {
+            font-size: 1.2rem;
+            color: var(--beige);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        .btn-primary {
+            background-color: var(--brick-red);
+            color: var(--cream);
+            border: 1px solid var(--cream);
+            padding: 0.9rem 2.2rem;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--dark-brown);
+            transform: translateY(-2px);
+        }
+
+        /* Editorial & Content Styling */
+        h2.section-title {
+            font-size: 2.8rem;
+            color: var(--cream);
+            margin-bottom: 1.5rem;
+            border-left: 5px solid var(--brick-red);
+            padding-left: 1rem;
+            line-height: 1;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            color: #dcd0b5;
+            font-size: 1.05rem;
+        }
+
+        .archive-stamp {
+            font-family: 'Special Elite', cursive;
+            font-size: 0.85rem;
+            color: var(--old-paper);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        /* Interactive Map Section */
+        .map-container {
+            background: rgba(20, 30, 38, 0.9);
+            border: 1px solid var(--old-paper);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+
+        .map-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .region-btn {
+            background: var(--dark-navy);
+            border: 1px solid var(--beige);
+            color: var(--cream);
+            padding: 1.2rem 1rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Roboto Slab', serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .region-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+        }
+
+        .region-btn[data-region="jabar"]::before { background: var(--jabar); }
+        .region-btn[data-region="jateng"]::before { background: var(--jateng); }
+        .region-btn[data-region="kalsel"]::before { background: var(--kalsel); }
+        .region-btn[data-region="sulsel"]::before { background: var(--sulsel); }
+        .region-btn[data-region="aceh"]::before { background: var(--aceh); }
+
+        .region-btn:hover, .region-btn.active {
+            background: var(--dark-brown);
+            border-color: var(--cream);
+            transform: translateX(3px);
+        }
+
+        .region-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .region-leader {
+            font-size: 0.8rem;
+            color: var(--beige);
+            font-style: italic;
+        }
+
+        .region-detail-panel {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--old-paper);
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .region-detail-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Kuratorial / Analysis Reveal */
+        .curatorial-box {
+            background: rgba(89, 67, 51, 0.2);
+            border-left: 4px solid var(--old-paper);
+            border: 1px solid rgba(185, 155, 107, 0.3);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .curatorial-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .curatorial-title {
+            font-family: 'Special Elite', cursive;
+            color: var(--beige);
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .reveal-btn {
+            background: none;
+            border: 1px solid var(--beige);
+            color: var(--cream);
+            padding: 0.4rem 1rem;
+            font-size: 0.85rem;
+            cursor: pointer;
+            font-family: 'Roboto Slab', serif;
+            transition: background 0.3s;
+        }
+
+        .reveal-btn:hover {
+            background: var(--beige);
+            color: var(--dark-navy);
+        }
+
+        .curatorial-content {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed rgba(185, 155, 107, 0.3);
+            display: none;
+        }
+
+        .curatorial-content.open {
+            display: block;
+        }
+
+        /* Timeline Section */
+        .timeline-container {
+            position: relative;
+            margin: 2rem 0;
+            padding-left: 2rem;
+            border-left: 2px solid var(--old-paper);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            cursor: pointer;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.35rem;
+            top: 0.3rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--brick-red);
+            border: 2px solid var(--cream);
+            transition: transform 0.3s;
+        }
+
+        .timeline-item:hover::before {
+            transform: scale(1.3);
+        }
+
+        .timeline-year {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: var(--beige);
+            letter-spacing: 1px;
+        }
+
+        .timeline-desc {
+            font-size: 0.95rem;
+            color: #dcd0b5;
+        }
+
+        /* Misconception / Benarkah? */
+        .misconception-card {
+            background: rgba(32, 32, 32, 0.6);
+            border: 1px solid var(--old-paper);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .misconception-question {
+            font-weight: 600;
+            color: var(--cream);
+            margin-bottom: 1rem;
+        }
+
+        .misconception-options {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .misc-btn {
+            background: var(--dark-navy);
+            border: 1px solid var(--beige);
+            color: var(--cream);
+            padding: 0.5rem 1.5rem;
+            cursor: pointer;
+            font-family: 'Roboto Slab', serif;
+            transition: all 0.2s;
+        }
+
+        .misc-btn:hover {
+            background: var(--beige);
+            color: var(--dark-navy);
+        }
+
+        .misc-feedback {
+            font-size: 0.95rem;
+            padding: 0.8rem;
+            background: rgba(143, 48, 41, 0.15);
+            border-left: 3px solid var(--brick-red);
+            display: none;
+        }
+
+        /* Compare Feature */
+        .compare-box {
+            background: rgba(20, 30, 38, 0.9);
+            border: 1px solid var(--old-paper);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .compare-selectors {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        select.compare-select {
+            width: 100%;
+            background: var(--dark-navy);
+            color: var(--cream);
+            border: 1px solid var(--beige);
+            padding: 0.8rem;
+            font-family: 'Roboto Slab', serif;
+            font-size: 0.95rem;
+        }
+
+        .compare-result-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            display: none;
+        }
+
+        .compare-column {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(185, 155, 107, 0.3);
+            padding: 1.2rem;
+        }
+
+        .compare-column h4 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
+            color: var(--beige);
+            margin-bottom: 0.8rem;
+            border-bottom: 1px solid var(--old-paper);
+            padding-bottom: 0.3rem;
+        }
+
+        /* Quiz Section */
+        .quiz-card {
+            background: rgba(20, 30, 38, 0.95);
+            border: 1px solid var(--old-paper);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .quiz-progress {
+            font-family: 'Special Elite', cursive;
+            font-size: 0.85rem;
+            color: var(--old-paper);
+            margin-bottom: 1rem;
+        }
+
+        .quiz-question-text {
+            font-size: 1.2rem;
+            color: var(--cream);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-option-btn {
+            background: var(--dark-navy);
+            border: 1px solid var(--beige);
+            color: var(--cream);
+            padding: 0.9rem 1.2rem;
+            text-align: left;
+            cursor: pointer;
+            font-family: 'Roboto Slab', serif;
+            transition: all 0.2s;
+        }
+
+        .quiz-option-btn:hover:not(:disabled) {
+            background: var(--dark-brown);
+            border-color: var(--cream);
+        }
+
+        .quiz-option-btn.correct {
+            background: #285430 !important;
+            border-color: #557A46 !important;
+        }
+
+        .quiz-option-btn.incorrect {
+            background: #8F3029 !important;
+            border-color: #C84B31 !important;
+        }
+
+        .quiz-feedback {
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(0,0,0,0.4);
+            border-left: 3px solid var(--beige);
+            display: none;
+        }
+
+        .quiz-next-btn {
+            background: var(--brick-red);
+            color: var(--cream);
+            border: 1px solid var(--cream);
+            padding: 0.7rem 1.8rem;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            display: none;
+        }
+
+        .quiz-score-container {
+            text-align: center;
+            padding: 2rem;
+            display: none;
+        }
+
+        .quiz-score-container h3 {
+            font-size: 2.5rem;
+            color: var(--beige);
+            margin-bottom: 1rem;
+        }
+
+        /* Sources Section */
+        .source-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .source-list li {
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+            border-left: 2px solid var(--old-paper);
+            padding-left: 1rem;
+            color: #dcd0b5;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 1rem;
+            font-size: 0.85rem;
+            color: var(--old-paper);
+            font-family: 'Special Elite', cursive;
+            border-top: 1px solid rgba(185, 155, 107, 0.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--dark-navy);
+                padding: 1.5rem;
+                border-bottom: 1px solid var(--old-paper);
+                text-align: center;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .compare-selectors, .compare-result-grid {
+                grid-template-columns: 1fr;
+            }
+            h2.section-title {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="progress-bar"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-brand">ARSIP DI/TII</div>
+        <button class="menu-toggle" aria-label="Toggle Menu">&#9776;</button>
+        <ul class="nav-links">
+            <li><a href="#prolog">Prolog</a></li>
+            <li><a href="#peta">Peta</a></li>
+            <li><a href="#wilayah">Wilayah</a></li>
+            <li><a href="#analisis">Analisis</a></li>
+            <li><a href="#kuis">Kuis</a></li>
+            <li><a href="#sumber">Sumber</a></li>
+        </ul>
+    </nav>
+
+    <!-- Cover Section -->
+    <section id="cover" style="border:none; padding-top:4rem;">
+        <span class="cover-tag">DOKUMEN ARSIP SEJARAH NASIONAL</span>
+        <h1>DI/TII — DISINTEGRASI BANGSA</h1>
+        <p class="cover-subtitle">Lima wilayah. Lima persoalan lokal. Satu jaringan ideologis.<br>Menelusuri latar belakang, perkembangan, penyelesaian, dampak, dan makna sejarah DI/TII di Indonesia.</p>
+        <a href="#prolog" class="btn-primary">JELAJAHI SEJARAH →</a>
+    </section>
+
+    <div class="container">
+
+        <!-- Prolog -->
+        <section id="prolog">
+            <span class="archive-stamp">Bab 01 — Landasan Sejarah</span>
+            <h2 class="section-title">PROLOG: INDONESIA SETELAH KEMERDEKAAN</h2>
+            <p>Pada 17 Agustus 1945, Soekarno-Hatta memproklamasikan Republik Indonesia. Namun, kemerdekaan bukan berarti seluruh persoalan negara langsung selesai.</p>
+            <p>Indonesia masih berada dalam proses membangun pemerintahan, menata kekuatan militer, menghadapi perubahan politik, dan menyatukan kepentingan berbagai daerah serta kelompok.</p>
+            <p>Dalam situasi inilah muncul berbagai konflik dan gerakan yang kemudian menguji kemampuan negara mempertahankan persatuan. Salah satunya adalah gerakan <strong>Darul Islam/Tentara Islam Indonesia (DI/TII)</strong>.</p>
+            
+            <div class="curatorial-box">
+                <div class="curatorial-header">
+                    <span class="curatorial-title">PERTANYAAN BESAR: APA ITU DI/TII?</span>
+                    <button class="reveal-btn" onclick="toggleAnalysis(this)">BONGKAR ANALISIS</button>
+                </div>
+                <div class="curatorial-content">
+                    <p>Darul Islam/Tentara Islam Indonesia (DI/TII) adalah gerakan bersenjata yang bertujuan mendirikan Negara Islam Indonesia (NII). Gerakan ini muncul di beberapa daerah Indonesia dan menjadi salah satu ancaman terhadap persatuan bangsa pada masa awal kemerdekaan.</p>
+                    <p><strong>Pertanyaan Besar:</strong> Apakah semua gerakan DI/TII memiliki latar belakang yang sama?</p>
+                    <p><em>Jawaban singkat:</em> Tidak sepenuhnya. Ada gagasan bersama mengenai negara Islam, tetapi terdapat pula persoalan politik, militer, dan kondisi daerah masing-masing.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Peta Interaktif -->
+        <section id="peta">
+            <span class="archive-stamp">Bab 02 — Geografi Konflik</span>
+            <h2 class="section-title">PETA INTERAKTIF: LIMA WILAYAH</h2>
+            <p>Peta menampilkan lima wilayah episentrum perlawanan DI/TII di Indonesia. Klik salah satu wilayah di bawah untuk melihat ringkasan tokoh dan latar belakang awal.</p>
+            
+            <div class="map-container">
+                <div class="map-grid">
+                    <button class="region-btn" data-region="jabar" onclick="selectRegion('jabar')">
+                        <span class="region-title">Jawa Barat</span>
+                        <span class="region-leader">S.M. Kartosuwiryo</span>
+                    </button>
+                    <button class="region-btn" data-region="jateng" onclick="selectRegion('jateng')">
+                        <span class="region-title">Jawa Tengah</span>
+                        <span class="region-leader">Amir Fatah</span>
+                    </button>
+                    <button class="region-btn" data-region="kalsel" onclick="selectRegion('kalsel')">
+                        <span class="region-title">Kalimantan Selatan</span>
+                        <span class="region-leader">Ibnu Hadjar</span>
+                    </button>
+                    <button class="region-btn" data-region="sulsel" onclick="selectRegion('sulsel')">
+                        <span class="region-title">Sulawesi Selatan</span>
+                        <span class="region-leader">Kahar Muzakkar</span>
+                    </button>
+                    <button class="region-btn" data-region="aceh" onclick="selectRegion('aceh')">
+                        <span class="region-title">Aceh</span>
+                        <span class="region-leader">Daud Beureueh</span>
+                    </button>
+                </div>
+
+                <div id="region-jabar" class="region-detail-panel">
+                    <h3 style="color: var(--jabar); font-family: 'Bebas Neue'; font-size: 1.5rem;">Jawa Barat — Episentrum Perlawanan</h3>
+                    <p><strong>Tokoh Utama:</strong> Sekarmadji Maridjan Kartosuwiryo.</p>
+                    <p><strong>Latar Belakang:</strong> Kekecewaan terhadap hasil Perjanjian Renville (1948) di mana pasukan Republik harus hijrah dari Jawa Barat, serta penolakan terhadap dasar negara Republik Indonesia yang bukan hukum Islam.</p>
+                    <p><strong>Proklamasi NII:</strong> 7 Agustus 1949. Ditumpas melalui Operasi Bharatayudha dengan strategi Pagar Betis. Kartosuwiryo ditangkap pada 1962.</p>
+                </div>
+
+                <div id="region-jateng" class="region-detail-panel">
+                    <h3 style="color: var(--jateng); font-family: 'Bebas Neue'; font-size: 1.5rem;">Jawa Tengah — Amir Fatah & Perluasan</h3>
+                    <p><strong>Tokoh Utama:</strong> Amir Fatah (Mulai 1950).</p>
+                    <p><strong>Latar Belakang:</strong> Amir Fatah dan pengikutnya bergabung dengan jaringan DI/TII serta menentang pemerintah Republik Indonesia di daerah Pekalongan, Tegal, dan Brebes.</p>
+                    <p><strong>Penyelesaian:</strong> Berhasil ditumpas melalui operasi militer pemerintah pada awal tahun 1950-an.</p>
+                </div>
+
+                <div id="region-kalsel" class="region-detail-panel">
+                    <h3 style="color: var(--kalsel); font-family: 'Bebas Neue'; font-size: 1.5rem;">Kalimantan Selatan — Ibnu Hadjar & Kekecewaan Pasukan</h3>
+                    <p><strong>Tokoh Utama:</strong> Ibnu Hadjar (Mulai 1950-an).</p>
+                    <p><strong>Latar Belakang:</strong> Kekecewaan PRT (Pasukan Kesatuan Rakyat yang Tertindas) terhadap kebijakan demobilisasi dan penataan kembali pasukan TNI pascakemerdekaan.</p>
+                    <p><strong>Penyelesaian:</strong> Ibnu Hadjar ditangkap pada tahun 1963 dan gerakannya berhasil ditumpas.</p>
+                </div>
+
+                <div id="region-sulsel" class="region-detail-panel">
+                    <h3 style="color: var(--sulsel); font-family: 'Bebas Neue'; font-size: 1.5rem;">Sulawesi Selatan — Kahar Muzakkar & KGSS</h3>
+                    <p><strong>Tokoh Utama:</strong> Kahar Muzakkar (Mulai 1950).</p>
+                    <p><strong>Latar Belakang:</strong> Penolakan pemerintah atas permintaan integrasi pasukan KGSS (Komando Gerilya Sulawesi Selatan) secara utuh ke dalam APRIS.</p>
+                    <p><strong>Penyelesaian:</strong> Kahar Muzakkar tewas dalam operasi militer pada tahun 1965, mengakhiri perlawanan di Sulawesi Selatan.</p>
+                </div>
+
+                <div id="region-aceh" class="region-detail-panel">
+                    <h3 style="color: var(--aceh); font-family: 'Bebas Neue'; font-size: 1.5rem;">Aceh — Daud Beureueh & Otonomi Daerah</h3>
+                    <p><strong>Tokoh Utama:</strong> Daud Beureueh (Mulai 20 September 1953).</p>
+                    <p><strong>Latar Belakang:</strong> Kekecewaan terhadap kebijakan pusat, khususnya penurunan status Aceh dari daerah istimewa menjadi karesidenan di bawah Provinsi Sumatra Utara.</p>
+                    <p><strong>Penyelesaian:</strong> Diselesaikan secara damai melalui Musyawarah Kerukunan Rakyat Aceh pada 17–21 Desember 1962.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bab Rinci & Analisis -->
+        <section id="wilayah">
+            <span class="archive-stamp">Bab 03 — Pendalaman Materi</span>
+            <h2 class="section-title">ANALISIS LIMA WILAYAH & PENYEBARAN</h2>
+            <p>Mengapa DI/TII bisa menyebar ke lima daerah dengan karakter yang berbeda-beda?</p>
+            <p>Benang merah utamanya adalah gagasan mengenai Negara Islam Indonesia (NII) dan jaringan ideologis Kartosuwiryo. Namun, gagasan tersebut bertemu dengan persoalan lokal yang sangat spesifik di tiap daerah: kekecewaan politik, penataan pasukan militer, hubungan pusat dan daerah, serta ketidakstabilan pascakemerdekaan.</p>
+
+            <div class="curatorial-box">
+                <div class="curatorial-header">
+                    <span class="curatorial-title">KURATORIAL & ANALISIS KRITIS: RUMUS BESAR DI/TII</span>
+                    <button class="reveal-btn" onclick="toggleAnalysis(this)">BONGKAR ANALISIS</button>
+                </div>
+                <div class="curatorial-content">
+                    <p><strong>Rumus Kontekstual:</strong><br>
+                    DI/TII = Ideologi + Kekecewaan Politik + Persoalan Militer + Kondisi Pusat-Daerah + Kondisi Pascakemerdekaan + Jaringan Gerakan.</p>
+                    <p>Rumus ini bukan persamaan matematika, melainkan kerangka analisis sejarawan untuk memahami bahwa pemberontakan tidak muncul dari satu faktor tunggal.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline -->
+        <section id="timeline">
+            <span class="archive-stamp">Bab 04 — Kronologi</span>
+            <h2 class="section-title">TIMELINE PERISTIWA UTAMA</h2>
+            <p>Klik titik pada garis waktu untuk melihat peristiwa penting dalam perjalanan konflik DI/TII di Indonesia.</p>
+
+            <div class="timeline-container">
+                <div class="timeline-item">
+                    <div class="timeline-year">17 Agustus 1945</div>
+                    <div class="timeline-desc">Proklamasi Kemerdekaan Republik Indonesia oleh Soekarno-Hatta. Negara baru mulai dibangun di tengah transisi kekuasaan.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1948</div>
+                    <div class="timeline-desc">Perjanjian Renville. Pasukan Republik harus hijrah dari Jawa Barat, memberi ruang bagi Kartosuwiryo membangun basis kekuatan mandiri.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">7 Agustus 1949</div>
+                    <div class="timeline-desc">Sekarmadji Maridjan Kartosuwiryo memproklamasikan berdirinya Negara Islam Indonesia (NII) di Jawa Barat.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1950</div>
+                    <div class="timeline-desc">Gerakan mulai meluas ke Jawa Tengah (Amir Fatah) dan Sulawesi Selatan (Kahar Muzakkar melalui konflik KGSS-APRIS).</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">20 September 1953</div>
+                    <div class="timeline-desc">Daud Beureueh memproklamasikan perlawanan DI/TII di Aceh akibat penurunan status daerah istimewa.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1962–1965</div>
+                    <div class="timeline-desc">Penumpasan akhir gerakan utama: Penangkapan Kartosuwiryo (1962), perdamaian di Aceh (1962), penangkapan Ibnu Hadjar (1963), hingga tewasnya Kahar Muzakkar (1965).</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fitur Bandingkan Gerakan (Compare) -->
+        <section id="compare">
+            <span class="archive-stamp">Bab 05 — Perbandingan Interaktif</span>
+            <h2 class="section-title">BANDINGKAN GERAKAN DI/TII</h2>
+            <p>Pilih dua wilayah untuk membandingkan latar belakang, tokoh, dan karakter penyelesaiannya.</p>
+
+            <div class="compare-box">
+                <div class="compare-selectors">
+                    <select id="compare1" class="compare-select" onchange="updateCompare()">
+                        <option value="jabar">Jawa Barat (Kartosuwiryo)</option>
+                        <option value="jateng">Jawa Tengah (Amir Fatah)</option>
+                        <option value="kalsel">Kalimantan Selatan (Ibnu Hadjar)</option>
+                        <option value="sulsel">Sulawesi Selatan (Kahar Muzakkar)</option>
+                        <option value="aceh" selected>Aceh (Daud Beureueh)</option>
+                    </select>
+                    <select id="compare2" class="compare-select" onchange="updateCompare()">
+                        <option value="jabar" selected>Jawa Barat (Kartosuwiryo)</option>
+                        <option value="jateng">Jawa Tengah (Amir Fatah)</option>
+                        <option value="kalsel">Kalimantan Selatan (Ibnu Hadjar)</option>
+                        <option value="sulsel">Sulawesi Selatan (Kahar Muzakkar)</option>
+                        <option value="aceh">Aceh (Daud Beureueh)</option>
+                    </select>
+                </div>
+
+                <div class="compare-result-grid" id="compare-grid" style="display: grid;">
+                    <div class="compare-column" id="col1">
+                        <h4 id="comp-title-1">Jawa Barat</h4>
+                        <p id="comp-content-1">Memuat data perbandingan wilayah pertama...</p>
+                    </div>
+                    <div class="compare-column" id="col2">
+                        <h4 id="comp-title-2">Aceh</h4>
+                        <p id="comp-content-2">Memuat data perbandingan wilayah kedua...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benarkah? (Misconception) -->
+        <section id="misconception">
+            <span class="archive-stamp">Bab 06 — Bongkar Miskonsepsi</span>
+            <h2 class="section-title">BENARKAH DEMIKIAN?</h2>
+            <p>Uji pemahaman kritis Anda terhadap asumsi umum seputar gerakan DI/TII.</p>
+
+            <div class="misconception-card">
+                <div class="misconception-question">1. Apakah semua gerakan DI/TII memiliki penyebab dan latar belakang yang persis sama?</div>
+                <div class="misconception-options">
+                    <button class="misc-btn" onclick="checkMisc(this, false)">Benar</button>
+                    <button class="misc-btn" onclick="checkMisc(this, true)">Tidak</button>
+                </div>
+                <div class="misc-feedback"><strong>Penjelasan:</strong> Tidak sepenuhnya sama. Meskipun ada benang merah ideologi NII, setiap wilayah memiliki persoalan lokal yang khas—seperti masalah demobilisasi pasukan di Kalimantan Selatan, status daerah istimewa di Aceh, atau penolakan integrasi pasukan di Sulawesi Selatan.</div>
+            </div>
+
+            <div class="misconception-card">
+                <div class="misconception-question">2. Apakah seluruh gerakan DI/TII diselesaikan pemerintah hanya dengan operasi militer bersenjata?</div>
+                <div class="misconception-options">
+                    <button class="misc-btn" onclick="checkMisc(this, false)">Benar</button>
+                    <button class="misc-btn" onclick="checkMisc(this, true)">Tidak</button>
+                </div>
+                <div class="misc-feedback"><strong>Penjelasan:</strong> Tidak. Meskipun sebagian besar ditumpas melalui operasi militer (seperti Operasi Bharatayudha di Jawa Barat), kasus di Aceh diselesaikan secara damai melalui pendekatan musyawarah (Musyawarah Kerukunan Rakyat Aceh) pada akhir 1962.</div>
+            </div>
+        </section>
+
+        <!-- Kuis Interaktif -->
+        <section id="kuis">
+            <span class="archive-stamp">Bab 07 — Evaluasi Pemahaman</span>
+            <h2 class="section-title">KUIS INTERAKTIF SEJARAH</h2>
+            <p>Uji pemahaman Anda mengenai materi DI/TII dari fakta, analisis, hingga evaluasi kritis.</p>
+
+            <div class="quiz-card" id="quiz-box">
+                <div class="quiz-progress" id="quiz-progress">Soal 1 dari 10</div>
+                <div class="quiz-question-text" id="quiz-question">Pertanyaan kuis akan dimuat di sini...</div>
+                <div class="quiz-options" id="quiz-options">
+                    <!-- Opsi jawaban dimasukkan via JS -->
+                </div>
+                <div class="quiz-feedback" id="quiz-feedback">Feedback akan muncul di sini setelah menjawab.</div>
+                <button class="quiz-next-btn" id="quiz-next-btn" onclick="nextQuizQuestion()">LANJUT KE SOAL BERIKUTNYA →</button>
+            </div>
+
+            <div class="quiz-score-container" id="quiz-score-container">
+                <h3>KUIS SELESAI</h3>
+                <p id="quiz-score-text" style="font-size: 1.2rem; margin-bottom: 1.5rem;"></p>
+                <button class="btn-primary" onclick="restartQuiz()">ULANGI KUIS</button>
+            </div>
+        </section>
+
+        <!-- Sumber & Daftar Pustaka -->
+        <section id="sumber" style="border: none;">
+            <span class="archive-stamp">Arsip & Referensi</span>
+            <h2 class="section-title">SUMBER UTAMA & RUJUKAN</h2>
+            <p>Penyusunan materi website digital history museum ini berpedoman pada sumber resmi pembelajaran sejarah:</p>
+            <ul class="source-list">
+                <li><strong>Materi Utama:</strong> Dokumen kurikulum sekolah “Materi Sejarah.docx” mengenai topik Disintegrasi Bangsa: DI/TII.</li>
+                <li><strong>Sumber Pendukung:</strong> Artikel sejarah pendidikan dan arsip publik mengenai pemberontakan DI/TII di berbagai daerah (seperti idsejarah.net dan catatan arsip kurikulum nasional).</li>
+                <li><strong>Blueprint & Desain:</strong> Panduan interaktif visual sejarah, tipografi arsip vintage, dan struktur modular kuratorial sejarah SMA.</li>
+            </ul>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Digital History Museum Archive. Dirancang untuk Pembelajaran Sejarah SMA.</p>
+    </footer>
+
+    <script>
+        // Scroll Progress Bar
+        window.onscroll = function() {
+            let winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        };
+
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Interactive Region Map Selector
+        function selectRegion(regionId) {
+            document.querySelectorAll('.region-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.region-detail-panel').forEach(panel => panel.classList.remove('active'));
+            
+            document.querySelector(`[data-region="${regionId}"]`).classList.add('active');
+            document.getElementById(`region-${regionId}`).classList.add('active');
+        }
+        // Set default active region
+        selectRegion('jabar');
+
+        // Curatorial Analysis Reveal Toggle
+        function toggleAnalysis(btn) {
+            const content = btn.parentElement.nextElementSibling;
+            content.classList.toggle('open');
+            btn.textContent = content.classList.contains('open') ? 'TUTUP ANALISIS' : 'BONGKAR ANALISIS';
+        }
+
+        // Misconception Interactive Feedback
+        function checkMisc(btn, isCorrect) {
+            const container = btn.closest('.misconception-card');
+            const feedback = container.querySelector('.misc-feedback');
+            const buttons = container.querySelectorAll('.misc-btn');
+            
+            buttons.forEach(b => {
+                b.style.opacity = '0.5';
+                b.disabled = true;
+            });
+
+            if(isCorrect) {
+                btn.style.background = '#285430';
+                btn.style.borderColor = '#557A46';
+            } else {
+                btn.style.background = '#8F3029';
+                btn.style.borderColor = '#C84B31';
+            }
+            feedback.style.display = 'block';
+        }
+
+        // Compare Feature Data & Logic
+        const compareData = {
+            jabar: {
+                title: "Jawa Barat (Kartosuwiryo)",
+                content: "<strong>Tokoh:</strong> S.M. Kartosuwiryo<br><strong>Latar Belakang:</strong> Penolakan Perjanjian Renville & cita-cita NII.<br><strong>Penyelesaian:</strong> Operasi Bharatayudha & Pagar Betis. Ditangkap tahun 1962."
+            },
+            jateng: {
+                title: "Jawa Tengah (Amir Fatah)",
+                content: "<strong>Tokoh:</strong> Amir Fatah<br><strong>Latar Belakang:</strong> Penggabungan kelompok lokal dengan jaringan DI/TII.<br><strong>Penyelesaian:</strong> Ditumpas melalui operasi militer pemerintah awal tahun 1950-an."
+            },
+            kalsel: {
+                title: "Kalimantan Selatan (Ibnu Hadjar)",
+                content: "<strong>Tokoh:</strong> Ibnu Hadjar<br><strong>Latar Belakang:</strong> Kekecewaan pasukan PRT terhadap kebijakan demobilisasi TNI.<br><strong>Penyelesaian:</strong> Ibnu Hadjar ditangkap pada tahun 1963."
+            },
+            sulsel: {
+                title: "Sulawesi Selatan (Kahar Muzakkar)",
+                content: "<strong>Tokoh:</strong> Kahar Muzakkar<br><strong>Latar Belakang:</strong> Penolakan integrasi penuh pasukan KGSS ke APRIS.<br><strong>Penyelesaian:</strong> Berakhir setelah Kahar Muzakkar tewas dalam operasi militer 1965."
+            },
+            aceh: {
+                title: "Aceh (Daud Beureueh)",
+                content: "<strong>Tokoh:</strong> Daud Beureueh<br><strong>Latar Belakang:</strong> Penurunan status Aceh dari daerah istimewa menjadi karesidenan.<br><strong>Penyelesaian:</strong> Penyelesaian damai melalui musyawarah pada Desember 1962."
+            }
+        };
+
+        function updateCompare() {
+            const val1 = document.getElementById('compare1').value;
+            const val2 = document.getElementById('compare2').value;
+
+            document.getElementById('comp-title-1').innerText = compareData[val1].title;
+            document.getElementById('comp-content-1').innerHTML = compareData[val1].content;
+
+            document.getElementById('comp-title-2').innerText = compareData[val2].title;
+            document.getElementById('comp-content-2').innerHTML = compareData[val2].content;
+        }
+        updateCompare();
+
+        // Quiz Data (10 Soal sesuai Blueprint)
+        const quizData = [
+            {
+                question: "Kapan Sekarmadji Maridjan Kartosuwiryo memproklamasikan berdirinya Negara Islam Indonesia (NII)?",
+                options: ["17 Agustus 1945", "7 Agustus 1949", "20 September 1953", "1 Januari 1950"],
+                answer: 1,
+                feedback: "Kartosuwiryo memproklamasikan NII pada 7 Agustus 1949 di pedalaman Jawa Barat."
+            },
+            {
+                question: "Perjanjian apakah yang menjadi salah satu titik pemicu utama penolakan pasukan Kartosuwiryo untuk meninggalkan Jawa Barat?",
+                options: ["Perjanjian Linggarjati", "Perjanjian Renville", "Perjanjian Roem-Royen", "Konferensi Meja Bundar"],
+                answer: 1,
+                feedback: "Perjanjian Renville (1948) mewajibkan pasukan Republik hijrah dari Jawa Barat, yang dimanfaatkan Kartosuwiryo untuk membangun basis kekuasaan."
+            },
+            {
+                question: "Siapa tokoh utama yang memimpin pergerakan DI/TII di Aceh yang dilatarbelakangi kekecewaan atas penurunan status daerah?",
+                options: ["Amir Fatah", "Ibnu Hadjar", "Daud Beureueh", "Kahar Muzakkar"],
+                answer: 2,
+                feedback: "Daud Beureueh memimpin perlawanan di Aceh mulai 20 September 1953 karena penurunan status Aceh menjadi karesidenan."
+            },
+            {
+                question: "Apa latar belakang utama gerakan Ibnu Hadjar di Kalimantan Selatan?",
+                options: ["Penurunan status provinsi", "Kekecewaan pasukan PRT terhadap kebijakan demobilisasi TNI", "Perbedaan mazhab agama", "Sengketa batas wilayah perkebunan"],
+                answer: 1,
+                feedback: "Gerakan Ibnu Hadjar dilatarbelakangi kekecewaan Pasukan Kesatuan Rakyat yang Tertindas (PRT) terhadap penataan ulang dan demobilisasi pasukan."
+            },
+            {
+                question: "Apa bentuk penyelesaian yang ditempuh pemerintah dalam meredam konflik DI/TII di Aceh pada Desember 1962?",
+                options: ["Operasi militer skala besar Pagar Betis", "Pendekatan dan penyelesaian secara damai (Musyawarah Kerukunan Rakyat Aceh)", "Pengasingan tokoh pimpinan ke luar negeri", "Embargo ekonomi total wilayah Aceh"],
+                answer: 1,
+                feedback: "Aceh diselesaikan melalui pendekatan damai dan musyawarah pada 17–21 Desember 1962, berbeda dengan wilayah lain yang umumnya melalui operasi militer."
+            },
+            {
+                question: "Strategi militer apa yang terkenal digunakan bersama Operasi Bharatayudha untuk menumpas DI/TII di Jawa Barat?",
+                options: ["Gerilya Semesta", "Pagar Betis", "Banteng Raiders", "Operasi Pagar Besi"],
+                answer: 1,
+                feedback: "Pagar Betis adalah strategi pengepungan melibatkan partisipasi rakyat bersama militer untuk mempersempit ruang gerak pasukan Kartosuwiryo."
+            },
+            {
+                question: "Organisasi atau kesatuan apa di Sulawesi Selatan yang penolakan integrasinya ke APRIS memicu pemberontakan Kahar Muzakkar?",
+                options: ["KGSS (Komando Gerilya Sulawesi Selatan)", "Hizbullah dan Sabilillah", "PRT Kalimantan", "Divisi Siliwangi"],
+                answer: 0,
+                feedback: "Kahar Muzakkar kecewa karena permintaannya agar KGSS diterima utuh ke dalam APRIS ditolak pemerintah."
+            },
+            {
+                question: "Manakah pernyataan yang paling tepat menggambarkan karakteristik umum gerakan DI/TII di berbagai daerah?",
+                options: ["Seluruhnya memiliki struktur komando yang tunduk langsung kepada Kartosuwiryo", "Memiliki gagasan ideologi yang mirip (Negara Islam), tetapi digerakkan oleh persoalan dan konteks lokal yang berbeda", "Murni merupakan gerakan kriminal tanpa latar belakang politik", "Muncul secara bersamaan pada tanggal 17 Agustus 1945"],
+                answer: 1,
+                feedback: "Meskipun ada jaringan ideologis, setiap wilayah memiliki persoalan lokal masing-masing yang unik."
+            },
+            {
+                question: "Bagaimana akhir dari gerakan Kahar Muzakkar di Sulawesi Selatan menurut materi sejarah?",
+                options: ["Berakhir damai melalui perjanjian meja hijau", "Kahar Muzakkar tertangkap hidup-hidup pada 1963", "Kahar Muzakkar tewas dalam operasi militer pada tahun 1965", "Bermigrasi ke luar negeri"],
+                answer: 2,
+                feedback: "Materi sekolah mencatat Kahar Muzakkar tewas dalam operasi militer pada 1965, yang sekaligus mengakhiri DI/TII Sulawesi Selatan."
+            },
+            {
+                question: "Apa pelajaran jangka panjang terpenting yang dapat dipetik bangsa Indonesia dari peristiwa sejarah DI/TII?",
+                options: ["Pentingnya menyeragamkan seluruh budaya daerah", "Pentingnya persatuan, hubungan pusat-daerah yang baik, dan mengelola perbedaan melalui dialog", "Bahwa perbedaan pendapat tidak boleh ada sama sekali dalam negara", "Pentingnya kekuatan militer di atas segalanya"],
+                answer: 1,
+                feedback: "Pelajaran utamanya adalah menjaga keutuhan NKRI melalui persatuan, relasi pusat-daerah yang harmonis, dan toleransi."
+            }
+        ];
+
+        let currentQuizIndex = 0;
+        let score = 0;
+        let answered = false;
+
+        function loadQuizQuestion() {
+            answered = false;
+            const q = quizData[currentQuizIndex];
+            document.getElementById('quiz-progress').innerText = `Soal ${currentQuizIndex + 1} dari ${quizData.length}`;
+            document.getElementById('quiz-question').innerText = q.question;
+            
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+            
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-option-btn';
+                btn.innerText = opt;
+                btn.onclick = () => selectQuizAnswer(idx, btn);
+                optionsContainer.appendChild(btn);
+            });
+
+            document.getElementById('quiz-feedback').style.display = 'none';
+            document.getElementById('quiz-next-btn').style.display = 'none';
+        }
+
+        function selectQuizAnswer(selectedIndex, selectedBtn) {
+            if (answered) return;
+            answered = true;
+
+            const q = quizData[currentQuizIndex];
+            const buttons = document.querySelectorAll('.quiz-option-btn');
+
+            buttons.forEach((b, idx) => {
+                b.disabled = true;
+                if (idx === q.answer) {
+                    b.classList.add('correct');
+                } else if (idx === selectedIndex) {
+                    b.classList.add('incorrect');
+                }
+            });
+
+            if (selectedIndex === q.answer) {
+                score++;
+            }
+
+            const feedbackEl = document.getElementById('quiz-feedback');
+            feedbackEl.innerHTML = `<strong>${selectedIndex === q.answer ? 'Benar!' : 'Kurang tepat.'}</strong> ${q.feedback}`;
+            feedbackEl.style.display = 'block';
+
+            if (currentQuizIndex < quizData.length - 1) {
+                document.getElementById('quiz-next-btn').style.display = 'inline-block';
+            } else {
+                document.getElementById('quiz-next-btn').innerText = 'LIHAT HASIL KUIS →';
+                document.getElementById('quiz-next-btn').style.display = 'inline-block';
+            }
+        }
+
+        function nextQuizQuestion() {
+            currentQuizIndex++;
+            if (currentQuizIndex < quizData.length) {
+                loadQuizQuestion();
+            } else {
+                showQuizScore();
+            }
+        }
+
+        function showQuizScore() {
+            document.getElementById('quiz-box').style.display = 'none';
+            const scoreContainer = document.getElementById('quiz-score-container');
+            scoreContainer.style.display = 'block';
+            
+            let message = "";
+            let percentage = (score / quizData.length) * 100;
+            if (percentage >= 80) {
+                message = "Luar biasa! Anda memiliki pemahaman analitis yang sangat baik mengenai sejarah DI/TII.";
+            } else if (percentage >= 50) {
+                message = "Cukup baik! Anda sudah mengenali garis besar peristiwa, namun perlu memperdalam aspek analisis kritis antardaerah.";
+            } else {
+                message = "Teruslah belajar! Telusuri kembali bab materi dan peta interaktif untuk memperkuat pemahaman sejarah Anda.";
+            }
+
+            document.getElementById('quiz-score-text').innerHTML = `Skor Anda: <strong>${score} / ${quizData.length}</strong> (${percentage}%)<br><br>${message}`;
+        }
+
+        function restartQuiz() {
+            currentQuizIndex = 0;
+            score = 0;
+            document.getElementById('quiz-score-container').style.display = 'none';
+            document.getElementById('quiz-box').style.display = 'block';
+            loadQuizQuestion();
+        }
+
+        // Inisialisasi Kuis saat halaman dimuat
+        loadQuizQuestion();
+    </script>
+</body>
+</html>
